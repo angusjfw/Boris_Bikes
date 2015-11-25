@@ -1,2 +1,1 @@
-hi
-software to develop a boris bikes management system
+software for managing a bike-hire docking station

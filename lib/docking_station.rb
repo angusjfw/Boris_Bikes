@@ -1,38 +1,25 @@
-require '~/boris_bikes/lib/bike.rb'
+require_relative './bike.rb'
 
 class DockingStation
-
-  attr_reader :bikes , :capacity
-
+  attr_reader :bikes, :capacity
   DEFAULT_CAPACITY = 20
-
 
   def initialize(capacity = DEFAULT_CAPACITY)
     @bikes = []
-     @capacity = capacity
+    @capacity = capacity
   end
 
   def release_bike
-
-    unless dock_empty?
-      current_bike = @bikes.last
-      @bikes.pop
-      return current_bike
-
-    else
-      raise "sorry no bikes avaialble"
-    end
+    return @bikes.pop unless dock_empty?
+    raise "sorry no bikes avaialble"
   end
 
   def dock(new_bike)
-   unless dock_full?
-      @bikes << new_bike
-   else
-      raise "sorry bike dock full capacity: #{@capacity}"
-   end
+    return @bikes << new_bike unless dock_full?
+    raise "sorry bike dock full capacity: #{@capacity}"
   end
 
-  private  # everything from here is local to class
+  private
 
   def dock_full?
      @bikes.length >= @capacity
